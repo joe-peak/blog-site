@@ -1,14 +1,18 @@
-from flask import Flask, render_template
+from datetime import datetime
+from flask import Flask, render_template, url_for
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
+from flask_moment import Moment
 
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
+moment = Moment(app)
 
 @app.route('/', methods = ['GET'])
 def index():
-    return render_template('index.html', name = 'Joe.C.Zhou'), 200
+    print(datetime.utcnow())
+    return render_template('index.html', name = 'Joe.C.Zhou', current_time = datetime.utcnow()), 200
 
 @app.route('/index')
 def user():
